@@ -1,106 +1,329 @@
-import { Heart, MessageCircle, Send, Bookmark, MoreVertical, MousePointer2, ChevronUp } from 'lucide-react';
+'use client';
+
+import { Heart, MessageCircle, Send, Bookmark, MoreVertical, MousePointer2, ChevronUp, Code2, Briefcase, FolderRoot, Cpu, Globe, Layout, Database, Terminal, Quote } from 'lucide-react';
 import Image from 'next/image';
+import { motion } from 'motion/react';
+
+const SKILLS = [
+  { name: 'React', icon: <Layout className="w-6 h-6 md:w-8 md:h-8" /> },
+  { name: 'Next.js', icon: <Globe className="w-6 h-6 md:w-8 md:h-8" /> },
+  { name: 'TypeScript', icon: <Code2 className="w-6 h-6 md:w-8 md:h-8" /> },
+  { name: 'Tailwind', icon: <Cpu className="w-6 h-6 md:w-8 md:h-8" /> },
+  { name: 'Node.js', icon: <Terminal className="w-6 h-6 md:w-8 md:h-8" /> },
+  { name: 'Firebase', icon: <Database className="w-6 h-6 md:w-8 md:h-8" /> },
+];
+
+const EXPERIENCE = [
+  {
+    title: 'Frontend Developer',
+    company: 'Tech Studio',
+    period: '2023 - Present',
+    desc: 'Developing high-performance web applications using React and Next.js.'
+  },
+  {
+    title: 'UI Designer',
+    company: 'Creative Agency',
+    period: '2022 - 2023',
+    desc: 'Designing aesthetic and user-friendly interfaces for mobile and web.'
+  }
+];
+
+const PROJECTS = [
+  {
+    title: 'E-Commerce App',
+    desc: 'A full-stack online store with real-time inventory.',
+    tech: ['Next.js', 'Firebase', 'Tailwind'],
+    image: 'https://picsum.photos/seed/shop/800/600'
+  },
+  {
+    title: 'Portfolio Poster',
+    desc: 'This aesthetic portfolio website inspired by IG stories.',
+    tech: ['React', 'Motion', 'Tailwind'],
+    image: 'https://picsum.photos/seed/portfolio/800/600'
+  }
+];
+
+const ISSUES = [
+  {
+    topic: 'AI dalam Industri Kreatif',
+    date: 'Maret 2024',
+    opinion: 'AI bukan untuk menggantikan kita, tapi alat yang memperkuat kreativitas. Desainer dan developer yang bisa memanfaatkan AI akan jauh lebih produktif dan inovatif dalam memecahkan masalah.'
+  },
+  {
+    topic: 'Budaya Kerja Remote',
+    date: 'Februari 2024',
+    opinion: 'Kerja remote menuntut disiplin tinggi dan komunikasi asinkron yang baik. Ini bukan sekadar bekerja dari rumah, tapi tentang membangun sistem kerja yang berorientasi pada hasil (output-driven).'
+  }
+];
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-white relative flex justify-center overflow-hidden">
+    <main className="min-h-screen bg-white relative flex flex-col items-center overflow-x-hidden">
       {/* Grid Background */}
-      <div className="absolute inset-0 pointer-events-none bg-grid-pattern"></div>
+      <div className="fixed inset-0 pointer-events-none bg-grid-pattern opacity-50"></div>
 
-      <div className="w-full max-w-[420px] relative z-10 flex flex-col py-12 px-8">
-        {/* Top Header */}
-        <div className="flex justify-between text-[11px] font-medium tracking-wide mb-10">
-          <span>Daily Instagram Story</span>
-          <span>Design poster</span>
-        </div>
-
-        {/* Main Heading */}
-        <div className="relative mb-12">
-          <h1 className="text-[5.5rem] font-extrabold leading-[0.85] tracking-tighter">
-            Hallo<br />
-            Everyone.
-          </h1>
+      {/* Section 1: Hero */}
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 w-full">
           
-          {/* URL Badge */}
-          <div className="absolute top-3 right-0 bg-black text-white text-[10px] px-3 py-1.5 rounded-full flex items-center gap-1 italic transform translate-x-2">
-            https://instagram.com/faudznn
-          </div>
-          
-          {/* Cursor and 43/365 */}
-          <div className="absolute right-0 bottom-0 flex items-center gap-1 transform translate-x-4 translate-y-6">
-            <MousePointer2 className="w-5 h-5 fill-black" />
-            <span className="text-sm font-bold">43/365</span>
-          </div>
-        </div>
+          {/* Left Column: Text Content */}
+          <div className="flex-1 flex flex-col w-full relative">
+            {/* Top Header */}
+            <div className="flex justify-between lg:justify-start lg:gap-12 text-[11px] md:text-xs font-medium tracking-wide mb-10">
+              <span>Daily Instagram Story</span>
+              <span>Design poster</span>
+            </div>
 
-        {/* Instagram Frame */}
-        <div className="bg-white rounded-[2rem] shadow-[0_10px_50px_-15px_rgba(0,0,0,0.2)] p-4 mb-12 relative border border-gray-100">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-4 px-2">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gray-200 overflow-hidden relative border border-gray-100">
-                <Image src="https://picsum.photos/seed/avatar/100/100" alt="Avatar" fill className="object-cover" />
+            {/* Main Heading */}
+            <div className="relative mb-8 lg:mb-16">
+              <h1 className="text-[5.5rem] md:text-[7.5rem] lg:text-[8.5rem] font-extrabold leading-[0.85] tracking-tighter">
+                Hallo<br />
+                Everyone.
+              </h1>
+              
+              {/* URL Badge */}
+              <div className="absolute top-3 right-0 lg:left-[65%] lg:right-auto bg-black text-white text-[10px] md:text-xs px-3 py-1.5 rounded-full flex items-center gap-1 italic transform translate-x-2 lg:translate-x-0">
+                https://instagram.com/faudznn
               </div>
-              <span className="font-bold text-sm">faudznn</span>
+              
+              {/* Cursor and 43/365 */}
+              <div className="absolute right-0 lg:left-[65%] lg:right-auto bottom-0 flex items-center gap-1 transform translate-x-4 translate-y-6 lg:translate-y-12 lg:translate-x-0">
+                <MousePointer2 className="w-5 h-5 md:w-6 md:h-6 fill-black" />
+                <span className="text-sm md:text-base font-bold">43/365</span>
+              </div>
             </div>
-            <MoreVertical className="w-5 h-5 text-gray-500" />
+
+            {/* Desktop Bottom Section */}
+            <div className="hidden lg:flex flex-col gap-8 mt-auto">
+              <div className="flex gap-8 items-start">
+                <h2 className="text-[4.5rem] font-extrabold leading-[0.85] tracking-tighter w-[45%]">
+                  Instag<br />
+                  ramer
+                </h2>
+                <p className="text-sm leading-relaxed text-gray-800 w-[55%] font-medium pt-2">
+                  Virus Typography berawal dari sini, lihat orang-orang bikin story selalu keliatan aesthetic, dan akhirnya mencoba belajar dan produktif diberbagai macam story.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-8">
+                <div className="bg-black text-white text-xs px-4 py-1.5 font-medium">
+                  Design by faudznn
+                </div>
+                <div className="text-xs font-medium text-gray-600 italic">
+                  #Sipalingribet#Storyaesthetic
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Main Image Area */}
-          <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 mb-4 border border-gray-200">
-            {/* Background Texture/Image */}
-            <Image src="https://picsum.photos/seed/marble/400/500?grayscale&blur=2" alt="Background" fill className="object-cover opacity-60" />
-            
-            {/* The Person Image (Sticker effect) */}
-            <div className="absolute inset-0 flex items-center justify-center p-4">
-               <div className="relative w-[90%] h-[95%]">
-                  <Image src="https://picsum.photos/seed/photographer/400/500" alt="Photographer" fill className="object-cover rounded-xl border-[6px] border-white shadow-lg" />
-               </div>
+          {/* Right Column: IG Frame */}
+          <div className="w-full max-w-[420px] shrink-0">
+            <div className="bg-white rounded-[2rem] shadow-[0_10px_50px_-15px_rgba(0,0,0,0.2)] p-4 relative border border-gray-100">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-4 px-2">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-200 overflow-hidden relative border border-gray-100">
+                    <Image src="https://picsum.photos/seed/avatar/100/100" alt="Avatar" fill className="object-cover" referrerPolicy="no-referrer" />
+                  </div>
+                  <span className="font-bold text-sm md:text-base">faudznn</span>
+                </div>
+                <MoreVertical className="w-5 h-5 text-gray-500" />
+              </div>
+
+              {/* Main Image Area */}
+              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-gray-100 mb-4 border border-gray-200">
+                <Image src="https://picsum.photos/seed/marble/400/500?grayscale&blur=2" alt="Background" fill className="object-cover opacity-60" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 flex items-center justify-center p-4">
+                   <div className="relative w-[90%] h-[95%]">
+                      <Image src="https://picsum.photos/seed/photographer/400/500" alt="Photographer" fill className="object-cover rounded-xl border-[6px] border-white shadow-lg" referrerPolicy="no-referrer" />
+                   </div>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center justify-between px-2 pb-2">
+                <div className="flex items-center gap-4">
+                  <Heart className="w-6 h-6 md:w-7 md:h-7 text-red-500 fill-red-500" />
+                  <MessageCircle className="w-6 h-6 md:w-7 md:h-7 text-gray-700" />
+                  <Send className="w-6 h-6 md:w-7 md:h-7 text-gray-700" />
+                </div>
+                <div className="flex items-center gap-4">
+                   <span className="font-caveat text-3xl md:text-4xl -rotate-6 transform translate-y-1 mr-2">Tap here</span>
+                   <Bookmark className="w-6 h-6 md:w-7 md:h-7 text-gray-700" />
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center justify-between px-2 pb-2">
-            <div className="flex items-center gap-4">
-              <Heart className="w-6 h-6 text-red-500 fill-red-500" />
-              <MessageCircle className="w-6 h-6 text-gray-700" />
-              <Send className="w-6 h-6 text-gray-700" />
+          {/* Mobile Bottom Section */}
+          <div className="flex lg:hidden flex-col gap-8 w-full mt-8">
+            <div className="flex gap-4 items-start">
+              <h2 className="text-[3.5rem] font-extrabold leading-[0.85] tracking-tighter w-[45%]">
+                Instag<br />
+                ramer
+              </h2>
+              <p className="text-[11px] leading-relaxed text-gray-800 w-[55%] font-medium pt-1">
+                Virus Typography berawal dari sini, lihat orang-orang bikin story selalu keliatan aesthetic, dan akhirnya mencoba belajar dan produktif diberbagai macam story.
+              </p>
             </div>
-            <div className="flex items-center gap-4">
-               {/* Handwritten text */}
-               <span className="font-caveat text-3xl -rotate-6 transform translate-y-1 mr-2">Tap here</span>
-               <Bookmark className="w-6 h-6 text-gray-700" />
+
+            <div className="flex items-center justify-between">
+              <div className="bg-black text-white text-[10px] px-3 py-1 font-medium">
+                Design by faudznn
+              </div>
+              <div className="text-[11px] font-medium text-gray-600 italic">
+                #Sipalingribet#Storyaesthetic
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="flex flex-col gap-8">
-          <div className="flex gap-4 items-start">
-            <h2 className="text-[3.5rem] font-extrabold leading-[0.85] tracking-tighter w-[45%]">
-              Instag<br />
-              ramer
-            </h2>
-            <p className="text-[11px] leading-relaxed text-gray-800 w-[55%] font-medium pt-1">
-              Virus Typography berawal dari sini, lihat orang-orang bikin story selalu keliatan aesthetic, dan akhirnya mencoba belajar dan produktif diberbagai macam story, meski hasilnya tidak sebagus orang-orang, tapi gapapa pd dlu saja whwhwh.
-            </p>
-          </div>
+        <div className="mt-16 lg:mt-24 flex justify-center w-full">
+          <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+            <ChevronUp className="w-8 h-8 md:w-10 md:h-10 text-black" />
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="flex items-center justify-between">
-            <div className="bg-black text-white text-[10px] px-3 py-1 font-medium">
-              Design by faudznn
-            </div>
-            <div className="text-[11px] font-medium text-gray-600 italic">
-              #Sipalingribet#Storyaesthetic
-            </div>
+      {/* Section 2: Skills */}
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+          <span>My Capabilities</span>
+          <span>Technical Skills</span>
+        </div>
+
+        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+          My<br />
+          Skills.
+        </h2>
+
+        {/* Horizontal Scroll for Skills */}
+        <div className="relative w-full -mx-6 px-6 md:mx-0 md:px-0">
+          <div className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {SKILLS.map((skill, i) => (
+              <div key={i} className="snap-center shrink-0 w-32 h-32 md:w-48 md:h-48 bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300">
+                <div className="p-3 md:p-5 bg-gray-50 rounded-2xl text-black">
+                  {skill.icon}
+                </div>
+                <span className="text-xs md:text-base font-bold">{skill.name}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-2 text-[10px] md:text-xs text-gray-400 italic text-center md:text-left">
+            ← Slide to see more →
           </div>
         </div>
 
-        {/* Bottom Arrow */}
-        <div className="mt-12 flex justify-center">
-          <ChevronUp className="w-8 h-8 text-black" />
+        <div className="mt-12 p-6 md:p-8 bg-black text-white rounded-3xl max-w-2xl">
+          <p className="text-[11px] md:text-sm leading-relaxed opacity-80">
+            Saya fokus pada pengembangan antarmuka yang bersih dan performa tinggi. Selalu mengeksplorasi teknologi terbaru untuk memberikan pengalaman pengguna yang luar biasa.
+          </p>
         </div>
-      </div>
+
+        <div className="mt-16 lg:mt-24 flex justify-center w-full">
+          <ChevronUp className="w-8 h-8 md:w-10 md:h-10 text-black" />
+        </div>
+      </section>
+
+      {/* Section 3: Experience */}
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+          <span>Career Journey</span>
+          <span>Experience</span>
+        </div>
+
+        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+          Work<br />
+          Exp.
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+          {EXPERIENCE.map((exp, i) => (
+            <div key={i} className="relative pl-8 md:pl-10 border-l-2 border-black py-2">
+              <div className="absolute w-4 h-4 md:w-5 md:h-5 bg-black rounded-full -left-[9px] md:-left-[11px] top-4"></div>
+              <span className="text-[10px] md:text-xs font-bold text-gray-400">{exp.period}</span>
+              <h3 className="text-lg md:text-2xl font-extrabold leading-tight mt-1">{exp.title}</h3>
+              <p className="text-xs md:text-sm font-bold text-gray-600 mb-2">{exp.company}</p>
+              <p className="text-[11px] md:text-sm leading-relaxed text-gray-800">
+                {exp.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 lg:mt-24 flex justify-center w-full">
+          <ChevronUp className="w-8 h-8 md:w-10 md:h-10 text-black" />
+        </div>
+      </section>
+
+      {/* Section 4: Thoughts on Issues */}
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+          <span>Personal Views</span>
+          <span>Current Issues</span>
+        </div>
+
+        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+          My<br />
+          Views.
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          {ISSUES.map((issue, i) => (
+            <div key={i} className="bg-gray-50 rounded-3xl p-8 md:p-10 border border-gray-100 relative group hover:bg-black hover:text-white transition-colors duration-300">
+              <Quote className="w-10 h-10 text-gray-200 absolute top-6 right-6 group-hover:text-gray-800 transition-colors duration-300" />
+              <span className="text-[10px] md:text-xs font-bold text-gray-400 group-hover:text-gray-400">{issue.date}</span>
+              <h3 className="text-xl md:text-2xl font-extrabold mt-2 mb-4">{issue.topic}</h3>
+              <p className="text-sm md:text-base leading-relaxed opacity-80">
+                "{issue.opinion}"
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 lg:mt-24 flex justify-center w-full">
+          <ChevronUp className="w-8 h-8 md:w-10 md:h-10 text-black" />
+        </div>
+      </section>
+
+      {/* Section 5: Projects */}
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+          <span>Portfolio</span>
+          <span>Recent Projects</span>
+        </div>
+
+        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+          My<br />
+          Works.
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+          {PROJECTS.map((project, i) => (
+            <div key={i} className="group cursor-pointer">
+              <div className="relative aspect-video rounded-3xl overflow-hidden mb-4 shadow-xl border border-gray-100">
+                <Image src={project.image} alt={project.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" referrerPolicy="no-referrer" />
+                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[9px] md:text-xs font-bold">
+                  {project.tech.join(' • ')}
+                </div>
+              </div>
+              <h3 className="text-xl md:text-3xl font-extrabold mb-1 md:mb-2">{project.title}</h3>
+              <p className="text-[11px] md:text-sm text-gray-600 leading-relaxed">
+                {project.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 lg:mt-24 flex items-center justify-between border-t border-gray-200 pt-8">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest">Available for hire</span>
+          </div>
+          <div className="text-[10px] md:text-xs font-bold">© 2024 FAUDZNN</div>
+        </div>
+      </section>
     </main>
   );
 }
+

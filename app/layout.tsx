@@ -1,8 +1,12 @@
 import type {Metadata} from 'next';
-import { Inter, Caveat } from 'next/font/google';
+import { Poppins, Caveat } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const poppins = Poppins({ 
+  weight: ['400', '500', '600', '700', '800', '900'],
+  subsets: ['latin'], 
+  variable: '--font-poppins' 
+});
 const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat' });
 
 export const metadata: Metadata = {
@@ -13,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${caveat.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${poppins.className} ${caveat.variable} antialiased`} suppressHydrationWarning>
         {children}
       </body>
     </html>

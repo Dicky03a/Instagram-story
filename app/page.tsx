@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Heart, MessageCircle, Send, Bookmark, MoreVertical, MousePointer2, ChevronUp, Code2, Briefcase, FolderRoot, Cpu, Globe, Layout, Database, Terminal, Quote } from 'lucide-react';
+import { Heart, MessageCircle, Send, Bookmark, MoreVertical, MousePointer2, ChevronUp, Code2, Briefcase, FolderRoot, Cpu, Globe, Layout, Database, Terminal, Quote, Home, Activity, MessageSquare, Folder, Gamepad2 } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 
@@ -215,14 +215,51 @@ function UnbeatableTicTacToe() {
   );
 }
 
+const NAV_ITEMS = [
+  { id: 'hero', icon: Home, label: 'Home' },
+  { id: 'skills', icon: Activity, label: 'Skills' },
+  { id: 'experience', icon: Briefcase, label: 'Experience' },
+  { id: 'views', icon: MessageSquare, label: 'Views' },
+  { id: 'projects', icon: Folder, label: 'Projects' },
+  { id: 'game', icon: Gamepad2, label: 'Game' },
+];
+
 export default function Page() {
+  const [activeSection, setActiveSection] = useState('hero');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = NAV_ITEMS.map(item => document.getElementById(item.id));
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(NAV_ITEMS[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <main className="min-h-screen bg-white relative flex flex-col items-center overflow-x-hidden">
       {/* Grid Background */}
       <div className="fixed inset-0 pointer-events-none bg-grid-pattern opacity-50"></div>
 
       {/* Section 1: Hero */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+      <section id="hero" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 w-full">
           
           {/* Left Column: Text Content */}
@@ -345,7 +382,7 @@ export default function Page() {
       </section>
 
       {/* Section 2: Skills */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+      <section id="skills" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
         <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>My Capabilities</span>
           <span>Technical Skills</span>
@@ -385,7 +422,7 @@ export default function Page() {
       </section>
 
       {/* Section 3: Experience */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+      <section id="experience" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
         <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>Career Journey</span>
           <span>Experience</span>
@@ -416,7 +453,7 @@ export default function Page() {
       </section>
 
       {/* Section 4: Thoughts on Issues */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+      <section id="views" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
         <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>Personal Views</span>
           <span>Current Issues</span>
@@ -446,7 +483,7 @@ export default function Page() {
       </section>
 
       {/* Section 5: Projects */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+      <section id="projects" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
         <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>Portfolio</span>
           <span>Recent Projects</span>
@@ -480,7 +517,7 @@ export default function Page() {
       </section>
 
       {/* Section 6: Interactive Footer (Game) */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center items-center">
+      <section id="game" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center items-center">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-[3.5rem] sm:text-[4rem] md:text-[6rem] font-extrabold leading-[0.85] tracking-tighter mb-4">
             Play<br />
@@ -493,7 +530,7 @@ export default function Page() {
 
         <UnbeatableTicTacToe />
 
-        <div className="mt-24 w-full flex items-center justify-between border-t border-gray-200 pt-8">
+        <div className="mt-24 w-full flex items-center justify-between border-t border-gray-200 pt-8 pb-24">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest">Available for hire</span>
@@ -501,6 +538,33 @@ export default function Page() {
           <div className="text-[10px] md:text-xs font-bold">© 2024 FAUDZNN</div>
         </div>
       </section>
+
+      {/* Floating Navigation Bar */}
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div className="bg-black rounded-full px-6 py-3.5 flex items-center gap-6 md:gap-8 shadow-2xl border border-gray-800">
+          {NAV_ITEMS.map((item) => {
+            const Icon = item.icon;
+            const isActive = activeSection === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`group relative transition-all duration-300 hover:scale-110 flex items-center justify-center ${isActive ? 'text-white' : 'text-gray-500 hover:text-white'}`}
+                aria-label={`Scroll to ${item.id}`}
+              >
+                <Icon className="w-6 h-6 md:w-7 md:h-7" strokeWidth={isActive ? 2.5 : 2} />
+                
+                {/* Tooltip */}
+                <span className="absolute -top-12 scale-0 group-hover:scale-100 transition-all duration-200 bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-lg shadow-lg pointer-events-none whitespace-nowrap origin-bottom">
+                  {item.label}
+                  {/* Tooltip Arrow */}
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-white"></span>
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </main>
   );
 }

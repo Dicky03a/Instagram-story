@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Heart, MessageCircle, Send, Bookmark, MoreVertical, MousePointer2, ChevronUp, Code2, Briefcase, FolderRoot, Cpu, Globe, Layout, Database, Terminal, Quote } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
@@ -55,6 +56,164 @@ const ISSUES = [
     opinion: 'Kerja remote menuntut disiplin tinggi dan komunikasi asinkron yang baik. Ini bukan sekadar bekerja dari rumah, tapi tentang membangun sistem kerja yang berorientasi pada hasil (output-driven).'
   }
 ];
+
+const WIN_PATTERNS = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
+];
+
+function checkWinner(board: (string | null)[]) {
+  for (let i = 0; i < WIN_PATTERNS.length; i++) {
+    const [a, b, c] = WIN_PATTERNS[i];
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return board[a];
+    }
+  }
+  if (!board.includes(null)) return 'Draw';
+  return null;
+}
+
+const minimax = (currentBoard: (string | null)[], depth: number, isMaximizing: boolean): number => {
+  let result = checkWinner(currentBoard);
+  if (result === 'O') return 10 - depth;
+  if (result === 'X') return depth - 10;
+  if (result === 'Draw') return 0;
+
+  if (isMaximizing) {
+    let bestScore = -Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (!currentBoard[i]) {
+        currentBoard[i] = 'O';
+        let score = minimax(currentBoard, depth + 1, false);
+        currentBoard[i] = null;
+        bestScore = Math.max(score, bestScore);
+      }
+    }
+    return bestScore;
+  } else {
+    let bestScore = Infinity;
+    for (let i = 0; i < 9; i++) {
+      if (!currentBoard[i]) {
+        currentBoard[i] = 'X';
+        let score = minimax(currentBoard, depth + 1, true);
+        currentBoard[i] = null;
+        bestScore = Math.min(score, bestScore);
+      }
+    }
+    return bestScore;
+  }
+};
+
+const getBestMove = (currentBoard: (string | null)[]) => {
+  let bestScore = -Infinity;
+  let move = -1;
+  for (let i = 0; i < 9; i++) {
+    if (!currentBoard[i]) {
+      currentBoard[i] = 'O';
+      let score = minimax(currentBoard, 0, false);
+      currentBoard[i] = null;
+      if (score > bestScore) {
+        bestScore = score;
+        move = i;
+      }
+    }
+  }
+  return move;
+};
+
+function UnbeatableTicTacToe() {
+  const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null));
+  const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+  const [winner, setWinner] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!isPlayerTurn && !winner) {
+      const timer = setTimeout(() => {
+        const aiMove = getBestMove([...board]);
+        if (aiMove !== -1) {
+          const newBoard = [...board];
+          newBoard[aiMove] = 'O';
+          setBoard(newBoard);
+          const newWinner = checkWinner(newBoard);
+          if (newWinner) {
+            setWinner(newWinner);
+          } else {
+            setIsPlayerTurn(true);
+          }
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [isPlayerTurn, board, winner]);
+
+  const handleCellClick = (index: number) => {
+    if (board[index] || winner || !isPlayerTurn) return;
+    
+    const newBoard = [...board];
+    newBoard[index] = 'X';
+    setBoard(newBoard);
+    
+    const newWinner = checkWinner(newBoard);
+    if (newWinner) {
+      setWinner(newWinner);
+    } else {
+      setIsPlayerTurn(false);
+    }
+  };
+
+  const resetGame = () => {
+    setBoard(Array(9).fill(null));
+    setWinner(null);
+    setIsPlayerTurn(true);
+  };
+
+  return (
+    <div className="flex flex-col items-center w-full max-w-sm">
+      <div className="flex justify-between w-full mb-6 px-4">
+        <div className={`text-sm font-bold px-4 py-2 rounded-full transition-colors ${isPlayerTurn && !winner ? 'bg-black text-white' : 'bg-gray-100 text-gray-400'}`}>
+          You (X)
+        </div>
+        <div className={`text-sm font-bold px-4 py-2 rounded-full transition-colors ${!isPlayerTurn && !winner ? 'bg-black text-white' : 'bg-gray-100 text-gray-400'}`}>
+          AI (O)
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-3 w-full bg-gray-100 p-3 rounded-3xl">
+        {board.map((cell, i) => (
+          <button
+            key={i}
+            onClick={() => handleCellClick(i)}
+            disabled={!!cell || !!winner || !isPlayerTurn}
+            className={`h-24 md:h-28 bg-white rounded-2xl text-4xl md:text-5xl font-extrabold flex items-center justify-center transition-all duration-300 ${!cell && !winner && isPlayerTurn ? 'hover:bg-gray-50 active:scale-95 cursor-pointer' : 'cursor-default'} ${cell === 'X' ? 'text-black' : 'text-red-500'}`}
+          >
+            {cell}
+          </button>
+        ))}
+      </div>
+
+      <div className="h-24 mt-8 flex items-center justify-center w-full">
+        {winner && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center gap-4 text-center"
+          >
+            <div className="text-xl md:text-2xl font-extrabold">
+              {winner === 'Draw' ? "It's a Draw!" : winner === 'X' ? "You Won! (Wait, that's illegal)" : "AI Wins!"}
+            </div>
+            <button 
+              onClick={resetGame}
+              className="px-8 py-3 bg-black text-white rounded-full font-bold hover:bg-gray-800 transition-colors active:scale-95"
+            >
+              Play Again
+            </button>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Page() {
   return (
@@ -275,7 +434,7 @@ export default function Page() {
               <span className="text-[10px] md:text-xs font-bold text-gray-400 group-hover:text-gray-400">{issue.date}</span>
               <h3 className="text-xl md:text-2xl font-extrabold mt-2 mb-4">{issue.topic}</h3>
               <p className="text-sm md:text-base leading-relaxed opacity-80">
-                "{issue.opinion}"
+                &quot;{issue.opinion}&quot;
               </p>
             </div>
           ))}
@@ -315,7 +474,26 @@ export default function Page() {
           ))}
         </div>
 
-        <div className="mt-16 lg:mt-24 flex items-center justify-between border-t border-gray-200 pt-8">
+        <div className="mt-16 lg:mt-24 flex justify-center w-full">
+          <ChevronUp className="w-8 h-8 md:w-10 md:h-10 text-black" />
+        </div>
+      </section>
+
+      {/* Section 6: Interactive Footer (Game) */}
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center items-center">
+        <div className="text-center mb-12">
+          <h2 className="text-[4rem] md:text-[6rem] font-extrabold leading-[0.85] tracking-tighter mb-4">
+            Play<br />
+            With AI.
+          </h2>
+          <p className="text-sm md:text-base text-gray-500 font-medium">
+            Can you beat the unbeatable system?
+          </p>
+        </div>
+
+        <UnbeatableTicTacToe />
+
+        <div className="mt-24 w-full flex items-center justify-between border-t border-gray-200 pt-8">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest">Available for hire</span>

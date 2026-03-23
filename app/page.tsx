@@ -179,13 +179,13 @@ function UnbeatableTicTacToe() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3 w-full bg-gray-100 p-3 rounded-3xl">
+      <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full bg-gray-100 p-2 sm:p-3 rounded-3xl">
         {board.map((cell, i) => (
           <button
             key={i}
             onClick={() => handleCellClick(i)}
             disabled={!!cell || !!winner || !isPlayerTurn}
-            className={`h-24 md:h-28 bg-white rounded-2xl text-4xl md:text-5xl font-extrabold flex items-center justify-center transition-all duration-300 ${!cell && !winner && isPlayerTurn ? 'hover:bg-gray-50 active:scale-95 cursor-pointer' : 'cursor-default'} ${cell === 'X' ? 'text-black' : 'text-red-500'}`}
+            className={`h-20 sm:h-24 md:h-28 bg-white rounded-2xl text-4xl md:text-5xl font-extrabold flex items-center justify-center transition-all duration-300 ${!cell && !winner && isPlayerTurn ? 'hover:bg-gray-50 active:scale-95 cursor-pointer' : 'cursor-default'} ${cell === 'X' ? 'text-black' : 'text-red-500'}`}
           >
             {cell}
           </button>
@@ -222,31 +222,31 @@ export default function Page() {
       <div className="fixed inset-0 pointer-events-none bg-grid-pattern opacity-50"></div>
 
       {/* Section 1: Hero */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20 w-full">
           
           {/* Left Column: Text Content */}
           <div className="flex-1 flex flex-col w-full relative">
             {/* Top Header */}
-            <div className="flex justify-between lg:justify-start lg:gap-12 text-[11px] md:text-xs font-medium tracking-wide mb-10">
+            <div className="flex justify-between lg:justify-start lg:gap-12 text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
               <span>Daily Instagram Story</span>
               <span>Design poster</span>
             </div>
 
             {/* Main Heading */}
-            <div className="relative mb-8 lg:mb-16">
-              <h1 className="text-[5.5rem] md:text-[7.5rem] lg:text-[8.5rem] font-extrabold leading-[0.85] tracking-tighter">
+            <div className="relative mb-12 lg:mb-16">
+              <h1 className="text-[4rem] sm:text-[5.5rem] md:text-[7.5rem] lg:text-[8.5rem] font-extrabold leading-[0.85] tracking-tighter break-words">
                 Hallo<br />
                 Everyone.
               </h1>
               
               {/* URL Badge */}
-              <div className="absolute top-3 right-0 lg:left-[65%] lg:right-auto bg-black text-white text-[10px] md:text-xs px-3 py-1.5 rounded-full flex items-center gap-1 italic transform translate-x-2 lg:translate-x-0">
+              <div className="absolute -top-6 right-0 sm:top-3 sm:right-0 lg:left-[65%] lg:right-auto bg-black text-white text-[10px] md:text-xs px-3 py-1.5 rounded-full flex items-center gap-1 italic transform sm:translate-x-2 lg:translate-x-0">
                 https://instagram.com/faudznn
               </div>
               
               {/* Cursor and 43/365 */}
-              <div className="absolute right-0 lg:left-[65%] lg:right-auto bottom-0 flex items-center gap-1 transform translate-x-4 translate-y-6 lg:translate-y-12 lg:translate-x-0">
+              <div className="absolute right-0 -bottom-8 sm:bottom-0 lg:left-[65%] lg:right-auto flex items-center gap-1 transform sm:translate-x-4 sm:translate-y-6 lg:translate-y-12 lg:translate-x-0">
                 <MousePointer2 className="w-5 h-5 md:w-6 md:h-6 fill-black" />
                 <span className="text-sm md:text-base font-bold">43/365</span>
               </div>
@@ -315,22 +315,22 @@ export default function Page() {
           </div>
 
           {/* Mobile Bottom Section */}
-          <div className="flex lg:hidden flex-col gap-8 w-full mt-8">
+          <div className="flex lg:hidden flex-col gap-6 w-full mt-8">
             <div className="flex gap-4 items-start">
-              <h2 className="text-[3.5rem] font-extrabold leading-[0.85] tracking-tighter w-[45%]">
+              <h2 className="text-[2.5rem] sm:text-[3.5rem] font-extrabold leading-[0.85] tracking-tighter w-[45%]">
                 Instag<br />
                 ramer
               </h2>
-              <p className="text-[11px] leading-relaxed text-gray-800 w-[55%] font-medium pt-1">
+              <p className="text-[10px] sm:text-[11px] leading-relaxed text-gray-800 w-[55%] font-medium pt-1">
                 Virus Typography berawal dari sini, lihat orang-orang bikin story selalu keliatan aesthetic, dan akhirnya mencoba belajar dan produktif diberbagai macam story.
               </p>
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="bg-black text-white text-[10px] px-3 py-1 font-medium">
+              <div className="bg-black text-white text-[9px] sm:text-[10px] px-3 py-1 font-medium">
                 Design by faudznn
               </div>
-              <div className="text-[11px] font-medium text-gray-600 italic">
+              <div className="text-[9px] sm:text-[11px] font-medium text-gray-600 italic">
                 #Sipalingribet#Storyaesthetic
               </div>
             </div>
@@ -345,19 +345,19 @@ export default function Page() {
       </section>
 
       {/* Section 2: Skills */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
-        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>My Capabilities</span>
           <span>Technical Skills</span>
         </div>
 
-        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+        <h2 className="text-[4rem] sm:text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-8 md:mb-12">
           My<br />
           Skills.
         </h2>
 
         {/* Horizontal Scroll for Skills */}
-        <div className="relative w-full -mx-6 px-6 md:mx-0 md:px-0">
+        <div className="relative w-full -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0">
           <div className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {SKILLS.map((skill, i) => (
               <div key={i} className="snap-center shrink-0 w-32 h-32 md:w-48 md:h-48 bg-white rounded-3xl shadow-lg border border-gray-100 flex flex-col items-center justify-center gap-3 hover:-translate-y-2 transition-transform duration-300">
@@ -385,13 +385,13 @@ export default function Page() {
       </section>
 
       {/* Section 3: Experience */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
-        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>Career Journey</span>
           <span>Experience</span>
         </div>
 
-        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+        <h2 className="text-[4rem] sm:text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-8 md:mb-12">
           Work<br />
           Exp.
         </h2>
@@ -416,13 +416,13 @@ export default function Page() {
       </section>
 
       {/* Section 4: Thoughts on Issues */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
-        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>Personal Views</span>
           <span>Current Issues</span>
         </div>
 
-        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+        <h2 className="text-[4rem] sm:text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-8 md:mb-12">
           My<br />
           Views.
         </h2>
@@ -446,13 +446,13 @@ export default function Page() {
       </section>
 
       {/* Section 5: Projects */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center">
-        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-10">
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
+        <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
           <span>Portfolio</span>
           <span>Recent Projects</span>
         </div>
 
-        <h2 className="text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-12">
+        <h2 className="text-[4rem] sm:text-[5rem] md:text-[7.5rem] font-extrabold leading-[0.85] tracking-tighter mb-8 md:mb-12">
           My<br />
           Works.
         </h2>
@@ -480,9 +480,9 @@ export default function Page() {
       </section>
 
       {/* Section 6: Interactive Footer (Game) */}
-      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-6 md:px-12 min-h-screen justify-center items-center">
-        <div className="text-center mb-12">
-          <h2 className="text-[4rem] md:text-[6rem] font-extrabold leading-[0.85] tracking-tighter mb-4">
+      <section className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center items-center">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-[3.5rem] sm:text-[4rem] md:text-[6rem] font-extrabold leading-[0.85] tracking-tighter mb-4">
             Play<br />
             With AI.
           </h2>

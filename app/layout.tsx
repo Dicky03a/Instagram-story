@@ -10,8 +10,8 @@ const poppins = Poppins({
 const caveat = Caveat({ subsets: ['latin'], variable: '--font-caveat' });
 
 export const metadata: Metadata = {
-  title: 'Instagram Story Poster',
-  description: 'A web implementation of a daily Instagram story design poster.',
+  title: 'Portofolio - Dicky Adi Saputra',
+  description: 'A web implementation of a daily story web developer.',
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

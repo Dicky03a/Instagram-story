@@ -9,6 +9,9 @@ import nextLogo from "@/app/assets/logo/nextjs.svg";
 import mysqlLogo from "@/app/assets/logo/mysql.svg";
 import tailwindLogo from "@/app/assets/logo/tailwind.svg";
 import laravelLogo from "@/app/assets/logo/Laravel.svg";
+import phpLogo from "@/app/assets/logo/php.svg";
+import boostrapLogo from "@/app/assets/logo/boostrap.svg";
+
 import Image from "next/image";
 
 const SKILLS = [
@@ -17,6 +20,8 @@ const SKILLS = [
   { name: "Laravel", logo: laravelLogo },
   { name: "Tailwind CSS", logo: tailwindLogo },
   { name: "MySQL", logo: mysqlLogo },
+  { name: "PHP", logo: phpLogo },
+  { name: "Bootstrap", logo: boostrapLogo },
 ];
 
 export default function SkillsSection() {

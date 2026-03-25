@@ -6,15 +6,21 @@ import ExperienceCard from './ExperienceCard';
 const EXPERIENCE = [
   {
     title: 'Frontend Developer',
-    company: 'Tech Studio',
+    company: '.....',
     period: '2023 - Present',
-    desc: 'Developing high-performance web applications using React and Next.js.'
+    desc: 'Developing high-performance web applications using Tailwind CSS, Laravel, React and Next.js.'
+  },
+  {
+    title: 'Backend Developer',
+    company: '.....',
+    period: '2022 - 2023',
+    desc: 'Developing high-performance web applications using Tailwind CSS, Laravel, React and Next.js.'
   },
   {
     title: 'UI Designer',
-    company: 'Creative Agency',
+    company: '......',
     period: '2022 - 2023',
-    desc: 'Designing aesthetic and user-friendly interfaces for mobile and web.'
+    desc: 'Designing intuitive and visually appealing user interfaces using modern design principles, focusing on user experience, consistency, and responsive layouts with tools like Figma and design systems.'
   }
 ];
 

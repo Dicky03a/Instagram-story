@@ -8,7 +8,7 @@ import reactLogo from "@/app/assets/logo/react.svg";
 import nextLogo from "@/app/assets/logo/nextjs.svg";
 import mysqlLogo from "@/app/assets/logo/mysql.svg";
 import tailwindLogo from "@/app/assets/logo/tailwind.svg";
-import laravelLogo from "@/app/assets/logo/Laravel.svg";
+import laravelLogo from "@/app/assets/logo/laravel.svg";
 import phpLogo from "@/app/assets/logo/php.svg";
 import boostrapLogo from "@/app/assets/logo/boostrap.svg";
 

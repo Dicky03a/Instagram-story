@@ -146,7 +146,7 @@ export default function UnbeatableTicTacToe() {
             className="flex flex-col items-center gap-4 text-center"
           >
             <div className="text-xl md:text-2xl font-extrabold">
-              {winner === 'Draw' ? "It's a Draw!" : winner === 'X' ? "You Won! (Wait, that's illegal)" : "AI Wins!"}
+              {winner === 'Draw' ? "It's a Draw!" : winner === 'X' ? "You Won! (Wait, that's illegal)" : "Dicky Wins!"}
             </div>
             <button 
               onClick={resetGame}

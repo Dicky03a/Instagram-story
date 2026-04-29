@@ -3,25 +3,19 @@
 import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 
-import lazisnuBjn from "@/app/assets/projek/lazisnubjn.png";
-import mediaPembelajaran from "@/app/assets/projek/mediapembelajaran.png";
+interface Project {
+  id: string;
+  title: string;
+  description: string | null;
+  image: string | null;
+  techStack: string[];
+}
 
-const PROJECTS = [
-  {
-    title: "PCNU Lazisnu Bojonegoro",
-    desc: "LAZISNU Bojonegoro adalah lembaga pengelola zakat, infak, dan sedekah yang berkomitmen untuk meningkatkan kesejahteraan masyarakat melalui program sosial, pendidikan, dan pemberdayaan ekonomi secara transparan dan amanah.",
-    tech: ["Laravel", "Mysql", "Tailwind"],
-    image: lazisnuBjn,
-  },
-  {
-    title: "Media Pembelajaran Interaktif",
-    desc: "A modern, interactive learning platform designed to enhance student engagement and comprehension.",
-    tech: ["React", "TypeScript", "Tailwind"],
-    image: mediaPembelajaran,
-  },
-];
+interface ProjectsSectionProps {
+  projects: Project[];
+}
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   return (
     <section
       id="projects"
@@ -39,20 +33,26 @@ export default function ProjectsSection() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-        {PROJECTS.map((project, i) => (
-          <div key={i} className="flex flex-col gap-4">
-            <div className="relative w-full h-48 md:h-64 rounded-lg overflow-hidden">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-300 hover:scale-105"
-              />
+        {projects.map((project) => (
+          <div key={project.id} className="flex flex-col gap-4">
+            <div className="relative w-full h-48 md:h-64 rounded-lg overflow-hidden border">
+              {project.image ? (
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                />
+              ) : (
+                <div className="w-full h-full bg-slate-100 flex items-center justify-center text-muted-foreground">
+                  No preview image
+                </div>
+              )}
             </div>
             <h3 className="text-xl font-semibold">{project.title}</h3>
-            <p className="text-gray-600">{project.desc}</p>
-            <div className="flex gap-2 mt-2">
-              {project.tech.map((tech, j) => (
+            <p className="text-gray-600">{project.description}</p>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {project.techStack.map((tech, j) => (
                 <span key={j} className="text-xs bg-gray-200 px-2 py-1 rounded">
                   {tech}
                 </span>
@@ -60,6 +60,9 @@ export default function ProjectsSection() {
             </div>
           </div>
         ))}
+        {projects.length === 0 && (
+          <p className="text-muted-foreground italic">No projects added yet.</p>
+        )}
       </div>
 
       <div className="mt-16 lg:mt-24 flex justify-center w-full">

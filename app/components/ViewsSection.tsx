@@ -3,20 +3,18 @@
 import { ChevronUp } from 'lucide-react';
 import IssueCard from './IssueCard';
 
-const ISSUES = [
-  {
-    topic: 'AI dalam Industri Kreatif',
-    date: 'Maret 2024',
-    opinion: 'AI bukan untuk menggantikan kita, tapi alat yang memperkuat kreativitas. Desainer dan developer yang bisa memanfaatkan AI akan jauh lebih produktif dan inovatif dalam memecahkan masalah.'
-  },
-  {
-    topic: 'Budaya Kerja Remote',
-    date: 'Februari 2024',
-    opinion: 'Kerja remote menuntut disiplin tinggi dan komunikasi asinkron yang baik. Ini bukan sekadar bekerja dari rumah, tapi tentang membangun sistem kerja yang berorientasi pada hasil (output-driven).'
-  }
-];
+interface View {
+  id: string;
+  topic: string;
+  date: string;
+  opinion: string;
+}
 
-export default function ViewsSection() {
+interface ViewsSectionProps {
+  views: View[];
+}
+
+export default function ViewsSection({ views }: ViewsSectionProps) {
   return (
     <section id="views" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
       <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
@@ -30,9 +28,12 @@ export default function ViewsSection() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-        {ISSUES.map((issue, i) => (
-          <IssueCard key={i} issue={issue} />
+        {views.map((view) => (
+          <IssueCard key={view.id} issue={view} />
         ))}
+        {views.length === 0 && (
+          <p className="text-muted-foreground italic">No views added yet.</p>
+        )}
       </div>
 
       <div className="mt-16 lg:mt-24 flex justify-center w-full">

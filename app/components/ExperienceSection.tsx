@@ -3,28 +3,27 @@
 import { ChevronUp } from 'lucide-react';
 import ExperienceCard from './ExperienceCard';
 
-const EXPERIENCE = [
-  {
-    title: 'Frontend Developer',
-    company: '.....',
-    period: '2023 - Present',
-    desc: 'Developing high-performance web applications using Tailwind CSS, Laravel, React and Next.js.'
-  },
-  {
-    title: 'Backend Developer',
-    company: '.....',
-    period: '2022 - 2023',
-    desc: 'Developing high-performance web applications using Tailwind CSS, Laravel, React and Next.js.'
-  },
-  {
-    title: 'UI Designer',
-    company: '......',
-    period: '2022 - 2023',
-    desc: 'Designing intuitive and visually appealing user interfaces using modern design principles, focusing on user experience, consistency, and responsive layouts with tools like Figma and design systems.'
-  }
-];
+interface Experience {
+  id: string;
+  company: string;
+  role: string;
+  startDate: Date;
+  endDate: Date | null;
+  description: string | null;
+}
 
-export default function ExperienceSection() {
+interface ExperienceSectionProps {
+  experiences: Experience[];
+}
+
+export default function ExperienceSection({ experiences }: ExperienceSectionProps) {
+  const formatExperience = (exp: Experience) => ({
+    title: exp.role,
+    company: exp.company,
+    period: `${new Date(exp.startDate).getFullYear()} - ${exp.endDate ? new Date(exp.endDate).getFullYear() : 'Present'}`,
+    desc: exp.description || ''
+  });
+
   return (
     <section id="experience" className="w-full max-w-6xl mx-auto relative z-10 flex flex-col py-12 px-4 sm:px-6 md:px-12 min-h-screen justify-center">
       <div className="flex justify-between text-[11px] md:text-xs font-medium tracking-wide mb-8 md:mb-10">
@@ -38,9 +37,12 @@ export default function ExperienceSection() {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
-        {EXPERIENCE.map((exp, i) => (
-          <ExperienceCard key={i} experience={exp} />
+        {experiences.map((exp) => (
+          <ExperienceCard key={exp.id} experience={formatExperience(exp)} />
         ))}
+        {experiences.length === 0 && (
+          <p className="text-muted-foreground italic">No experience added yet.</p>
+        )}
       </div>
 
       <div className="mt-16 lg:mt-24 flex justify-center w-full">

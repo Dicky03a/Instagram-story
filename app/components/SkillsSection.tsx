@@ -3,28 +3,19 @@
 import {
   ChevronUp,
 } from "lucide-react";
-
-import reactLogo from "@/app/assets/logo/react.svg";
-import nextLogo from "@/app/assets/logo/nextjs.svg";
-import mysqlLogo from "@/app/assets/logo/mysql.svg";
-import tailwindLogo from "@/app/assets/logo/tailwind.svg";
-import laravelLogo from "@/app/assets/logo/laravel.svg";
-import phpLogo from "@/app/assets/logo/php.svg";
-import boostrapLogo from "@/app/assets/logo/boostrap.svg";
-
 import Image from "next/image";
 
-const SKILLS = [
-  { name: "React", logo: reactLogo },
-  { name: "Next.js", logo: nextLogo },
-  { name: "Laravel", logo: laravelLogo },
-  { name: "Tailwind CSS", logo: tailwindLogo },
-  { name: "MySQL", logo: mysqlLogo },
-  { name: "PHP", logo: phpLogo },
-  { name: "Bootstrap", logo: boostrapLogo },
-];
+interface Skill {
+  id: string;
+  name: string;
+  icon: string | null;
+}
 
-export default function SkillsSection() {
+interface SkillsSectionProps {
+  skills: Skill[];
+}
+
+export default function SkillsSection({ skills }: SkillsSectionProps) {
   return (
     <section
       id="skills"
@@ -47,28 +38,40 @@ export default function SkillsSection() {
           className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-8 pt-4 [&::-webkit-scrollbar]:hidden"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {SKILLS.map((skill, i) => (
+          {skills.map((skill) => (
             <div
-              key={i}
+              key={skill.id}
               className="flex-shrink-0 flex flex-col items-center gap-3"
             >
-              <Image
-                src={skill.logo}
-                alt={skill.name}
-                width={64}
-                height={64}
-                className="object-contain transition-transform duration-300 hover:scale-110"
-              />
+              <div className="relative w-16 h-16 transition-transform duration-300 hover:scale-110">
+                {skill.icon ? (
+                  <Image
+                    src={skill.icon}
+                    alt={skill.name}
+                    fill
+                    className="object-contain"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-slate-100 rounded flex items-center justify-center text-[10px] text-center p-1">
+                    {skill.name}
+                  </div>
+                )}
+              </div>
 
               <span className="text-sm md:text-base text-black font-bold">
                 {skill.name}
               </span>
             </div>
           ))}
+          {skills.length === 0 && (
+            <p className="text-muted-foreground italic py-4">No skills added yet.</p>
+          )}
         </div>
-        <div className="mt-2 text-[10px] md:text-xs text-gray-400 italic text-center md:text-left">
-          ← Slide to see more →
-        </div>
+        {skills.length > 0 && (
+          <div className="mt-2 text-[10px] md:text-xs text-gray-400 italic text-center md:text-left">
+            ← Slide to see more →
+          </div>
+        )}
       </div>
 
       <div className="mt-12 p-6 md:p-8 bg-black text-white rounded-3xl max-w-2xl">

@@ -22,12 +22,6 @@ export default function GameSection() {
       <UnbeatableTicTacToe />
 
       <div className="mt-24 w-full flex items-center justify-between border-t border-gray-200 pt-8 pb-24">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
-          <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest">
-            Built with passion and dedication
-          </span>
-        </div>
         <div className="text-[10px] md:text-xs font-bold">
           © 2026 Dicky Adi Saputra. All rights reserved.
         </div>

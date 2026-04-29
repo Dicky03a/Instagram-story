@@ -12,9 +12,6 @@ export default function InstagramFrame() {
         {/* Header */}
         <div className="flex items-center justify-between mb-4 px-2">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-200 overflow-hidden relative border border-gray-100">
-              <Image src={logo} alt="Avatar" fill className="object-cover" referrerPolicy="no-referrer" />
-            </div>
             <span className="font-bold text-sm md:text-base">Dicky Adi Saputra</span>
           </div>
           <MoreVertical className="w-5 h-5 text-gray-500" />

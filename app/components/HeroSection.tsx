@@ -22,10 +22,6 @@ export default function HeroSection() {
               Hallo<br />
               Everyone.
             </h1>
-
-            <div className="absolute -top-6 right-0 sm:top-3 sm:right-0 lg:left-[65%] lg:right-auto bg-black text-white text-[10px] md:text-xs px-3 py-1.5 rounded-full flex items-center gap-1 italic transform sm:translate-x-2 lg:translate-x-0">
-              https://portofolio-eta-six-98.vercel.app/
-            </div>
           </div>
 
           <div className="hidden lg:flex flex-col gap-8 mt-auto">
